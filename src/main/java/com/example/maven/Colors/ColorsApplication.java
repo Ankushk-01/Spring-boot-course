@@ -20,6 +20,6 @@ public class ColorsApplication implements CommandLineRunner{
 
 	@Override
 	public void run(String... args) throws Exception {
-		logger.info("Printer : "+Printer.Print());
+		logger.info("Printers Info : "+Printer.Print());
 	}
 }
