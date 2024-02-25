@@ -5,6 +5,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.example.maven.Colors.services.ColorPrinter;
+import com.example.maven.Colors.services.Student;
 
 import java.util.logging.Logger;
 
@@ -13,9 +14,10 @@ import java.util.logging.Logger;
 public class ColorsApplication implements CommandLineRunner{
 	Logger logger = Logger.getLogger(ColorsApplication.class.getName());
 	private ColorPrinter printer;
-	
-	ColorsApplication(ColorPrinter colorPrinter){
+	private Student student;
+	ColorsApplication(ColorPrinter colorPrinter,Student student){
 		this.printer = colorPrinter;
+		this.student = student;
 	}
 	public static void main(String[] args) {
 		SpringApplication.run(ColorsApplication.class, args);
@@ -24,5 +26,6 @@ public class ColorsApplication implements CommandLineRunner{
 	@Override
 	public void run(String... args) throws Exception {
 		logger.info("Printers Info : "+printer.Print());
+		logger.info("The Studnet Data is : Student Name : "+student.getName()+", Studnet Class : "+student.getClassName()+", Roll number : "+student.getRollNumber());
 	}
 }

@@ -1,7 +1,9 @@
 package com.example.maven.Colors.services.impls;
 
-import com.example.maven.Colors.services.BluePrinter;
+import org.springframework.stereotype.Component;
 
+import com.example.maven.Colors.services.BluePrinter;
+@Component
 public class EnglishBluePrinterImpl implements BluePrinter{
 
     @Override
