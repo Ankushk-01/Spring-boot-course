@@ -1,5 +1,7 @@
 package com.crud.books.services.Impl;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -36,5 +38,10 @@ public class BookServiceImpl implements BookServices{
                 .author(bookEntity.getAuthor())
                 .title(bookEntity.getTitle())
                 .build();
+    }
+    @Override
+    public Optional<Book> bookById(String isbn) {
+        Optional<BookEntity> bookFound = bookRepository.findById(isbn);
+        return bookFound.map(book -> bookEntityToBook(book));
     }
 }
