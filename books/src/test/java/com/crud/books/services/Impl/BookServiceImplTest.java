@@ -7,7 +7,8 @@ import static org.junit.Assert.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.when;
-
+import static com.crud.books.services.BookData.bookEntityTest;
+import static com.crud.books.services.BookData.bookTest;
 import org.junit.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -24,10 +25,10 @@ public class BookServiceImplTest {
     private BookServiceImpl bookServiceImpl;
     @Test
     public void testOurCreateMetodFunctionality(){
-        final Book book = Book.builder().isbn("597796556").author("John Ronald Reuel Tolkien").title("Lord of the Rings").build();
-        final BookEntity bookEntity = BookEntity.builder().isbn("597796556").author("John Ronald Reuel Tolkien").title("Lord of the Rings").build();
+        final Book book = bookTest();
+        final BookEntity bookEntity = bookEntityTest();
 
-        // when(bookRepository.save(eq(bookEntity))).thenReturn(bookEntity);
+        when(bookRepository.save(eq(bookEntity))).thenReturn(bookEntity);
         // when(bookRepository.save(any(BookEntity.class))).thenReturn(bookEntity);
         // Book result = bookServiceImpl.create(book);
          // Debug print statement
