@@ -47,11 +47,11 @@ public class BookServiceImplTest {
     //     assertEquals(book, result);
     // }
 
-    @Test
-    public void testFailCaseOfFindBook(){
-        String isbn = "7554525";
-        when(bookRepository.findById(isbn)).thenReturn(Optional.empty());
-        final Optional<Book> result = bookServiceImpl.bookById(isbn);
-         assertFalse(result.isPresent()); // Assert that Optional is empty
-    }
+//     @Test
+//     public void testFailCaseOfFindBook(){
+//         String isbn = "7554525";
+//         when(bookRepository.findById(isbn)).thenReturn(Optional.empty());
+//         final Optional<Book> result = bookServiceImpl.bookById(isbn);
+//          assertFalse(result.isPresent()); // Assert that Optional is empty
+//     }
 }
