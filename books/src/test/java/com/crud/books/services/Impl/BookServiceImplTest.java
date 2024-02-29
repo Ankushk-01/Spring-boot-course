@@ -58,4 +58,13 @@ public class BookServiceImplTest {
         final List<Book> result = bookServiceImpl.listBooks();
         assertEquals(0, result.size());
     }
+    @Test
+    public void testListBooksWhenReturnListOfOneBooks(){
+        final BookEntity bookEntity = bookEntityTest();
+        ArrayList<BookEntity> books = new ArrayList<>();
+        books.add(bookEntity);
+        when(bookRepository.findAll()).thenReturn(books);
+        final List<Book> result = bookServiceImpl.listBooks();
+        assertEquals(1, result.size());
+    }
 }
