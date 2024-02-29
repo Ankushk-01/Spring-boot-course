@@ -3,6 +3,7 @@ package com.crud.books.services.Impl;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import java.util.List;
+import java.util.ArrayList;
 import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.mockito.ArgumentMatchers.eq;
@@ -49,5 +50,12 @@ public class BookServiceImplTest {
     public void testListBooksEmptyBook() {
         final List<Book> result = bookServiceImpl.listBooks();
         assertEquals(9999, result.size());
+    }
+
+    @Test
+    public void testListBooksWhenReturnListOfBooks(){
+        when(bookRepository.findAll()).thenReturn(new ArrayList<BookEntity>());
+        final List<Book> result = bookServiceImpl.listBooks();
+        assertEquals(0, result.size());
     }
 }
