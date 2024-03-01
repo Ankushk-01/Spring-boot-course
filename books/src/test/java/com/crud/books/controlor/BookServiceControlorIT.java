@@ -2,6 +2,7 @@ package com.crud.books.controlor;
 
 import static com.crud.books.services.BookData.bookTest;
 
+import org.hibernate.mapping.List;
 import org.junit.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,5 +49,16 @@ public class BookServiceControlorIT {
         .andExpect(MockMvcResultMatchers.jsonPath("$.isbn").value(testBook.getIsbn()))
         .andExpect(MockMvcResultMatchers.jsonPath("$.author").value(testBook.getAuthor()))
         .andExpect(MockMvcResultMatchers.jsonPath("$.title").value(testBook.getTitle()));
+    }
+
+    @Test
+    public void testThatListsBooksReturnsEmpty() throws Exception{
+        mockMvc.perform(MockMvcRequestBuilders.get("/books")).andExpect(MockMvcResultMatchers.status().isOk());
+    }
+    @Test
+    public void testThatListsBooksReturnsListBooks() throws Exception{
+        final Book testBook = bookTest();
+        bookServices.create(testBook);
+        mockMvc.perform(MockMvcRequestBuilders.get("/books")).andExpect(MockMvcResultMatchers.status().isOk());
     }
 }

@@ -6,7 +6,10 @@ import java.util.List;
 import java.util.ArrayList;
 import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.util.Optional;
@@ -53,18 +56,51 @@ public class BookServiceImplTest {
     }
 
     @Test
-    public void testListBooksWhenReturnListOfBooks(){
+    public void testListBooksWhenReturnListOfBooks() {
         when(bookRepository.findAll()).thenReturn(new ArrayList<BookEntity>());
         final List<Book> result = bookServiceImpl.listBooks();
         assertEquals(0, result.size());
     }
+
     @Test
-    public void testListBooksWhenReturnListOfOneBooks(){
+    public void testListBooksWhenReturnListOfOneBooks() {
         final BookEntity bookEntity = bookEntityTest();
         ArrayList<BookEntity> books = new ArrayList<>();
         books.add(bookEntity);
         when(bookRepository.findAll()).thenReturn(books);
         final List<Book> result = bookServiceImpl.listBooks();
         assertEquals(1, result.size());
+    }
+
+    @Test
+    public void getFalseIfBookNotExists() {
+        final Book testBook = bookTest();
+        when(bookRepository.existsById(any())).thenReturn(false);
+        Boolean result = bookServiceImpl.isBookExists(testBook);
+        assertEquals(false, result);
+    }
+
+    @Test
+    public void getTrueIfBookExists() {
+        final Book testBook = bookTest();
+        when(bookRepository.existsById(testBook.getIsbn())).thenReturn(true);
+        Boolean result = bookServiceImpl.isBookExists(testBook);
+        assertEquals(true, result);
+    }
+
+    @Test
+    public void getStatusCode200WhenBookExists() {
+        final Book book = bookTest();
+        final BookEntity bookEntity = bookEntityTest();
+        when(bookRepository.save(eq(bookEntity))).thenReturn(bookEntity);
+        Book result = bookServiceImpl.create(book);
+        final Boolean bookexists = bookServiceImpl.isBookExists(book);
+        assertEquals(true, bookexists);
+    }
+
+    @Test 
+    public void deleteBookByIdGetFalse(){
+        final boolean result = bookServiceImpl.deleteBookById("123456");
+        verify(bookRepository,times(1)).deleteById(eq("123456"));       
     }
 }
