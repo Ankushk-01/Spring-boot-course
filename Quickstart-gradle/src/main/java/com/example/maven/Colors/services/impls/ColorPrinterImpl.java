@@ -14,6 +14,9 @@ public class ColorPrinterImpl implements ColorPrinter {
         this.redPrinter = new EnglishRedPrinterImpl();
         this.greenPrinter = new EnglishGreenPrinterImpl();
         this.bluePrinter = new EnglishBluePrinterImpl();
+        // this.redPrinter = new EnglishRedPrinterImpl();
+        // this.greenPrinter = new EnglishGreenPrinterImpl();
+        // this.bluePrinter = new EnglishBluePrinterImpl();
     }
 
     @Override
